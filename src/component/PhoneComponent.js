@@ -1,14 +1,26 @@
 import React from 'react';
+import {Card, Button} from "react-bootstrap";
+import {connect} from "react-redux";
 
-const PhoneComponent = () => {
+const PhoneComponent = (props) => {
 
     return (
-        <div className="container">
-            <h1>Phone</h1>
-            <p><span></span></p>
-            <button>Buy</button>
-        </div>
+        <Card>
+            <Card.Body>
+                <Card.Title>Phone</Card.Title>
+                <Card.Text>
+                    Disponible : {props.phones}
+                </Card.Text>
+                <Button variant="primary">Buy</Button>
+            </Card.Body>
+        </Card>
     )
 }
 
-export default PhoneComponent;
+const mapStateToProps = (state) => {
+    return {
+        phones: state.phones
+    }
+}
+
+export default connect(mapStateToProps)(PhoneComponent);

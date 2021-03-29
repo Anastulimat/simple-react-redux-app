@@ -6,7 +6,7 @@ import {buyPhone} from "../redux/phone/actionPhone";
 const PhoneComponent = () => {
 
     // react-redux hook that replace mapStateToProps
-    const phones = useSelector(state => state.phones);
+    const phones = useSelector(state => state.phoneReducer.phones);
     const dispatch = useDispatch();
 
     return (

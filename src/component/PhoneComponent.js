@@ -1,22 +1,24 @@
 import React from 'react';
+import {useSelector, useDispatch} from "react-redux";
 import {Card, Button} from "react-bootstrap";
-import {connect} from "react-redux";
 import {buyPhone} from "../redux/phone/actionPhone";
 
-const PhoneComponent = (props) => {
+const PhoneComponent = () => {
 
-    console.log(props);
+    // react-redux hook that replace mapStateToProps
+    const phones = useSelector(state => state.phones);
+    const dispatch = useDispatch();
 
     return (
         <Card>
             <Card.Body>
                 <Card.Title>Phone</Card.Title>
                 <Card.Text>
-                    Disponible : {props.phones}
+                    Disponible : {phones}
                 </Card.Text>
                 <Button
                     variant="primary"
-                    onClick={() => props.buyPhone()}
+                    onClick={() => dispatch(buyPhone())}
                 >
                     Buy
                 </Button>
@@ -25,26 +27,4 @@ const PhoneComponent = (props) => {
     )
 }
 
-/**
- * Redux method, help to get state from redux store and pass it to component via props
- * @param state
- * @returns {{phones: (number|*)}}
- */
-const mapStateToProps = (state) => {
-    return {
-        phones: state.phones
-    }
-}
-
-/**
- * Redux method, help to pass action from redux store to our component's props
- * @param dispatch
- * @returns {{buyPhone: (function(): *)}}
- */
-const mapDispatchToProps = (dispatch) => {
-    return {
-        buyPhone: () => dispatch(buyPhone())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PhoneComponent);
+export default PhoneComponent;
